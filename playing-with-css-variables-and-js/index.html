@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Playing with CSS Variables and JS</title>
+    <style>
+
+        :root {
+            --base: red;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+
+        img {
+            width: 500px;
+            height: 200px;
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        body {
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .controls {
+            margin-bottom: 50px;
+        }
+
+        .hl {
+            color: var(--base);
+            text-decoration: none;
+        }
+
+        input {
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<h2>Update CSS Variables with <span class="hl">JS</span></h2>
+
+<div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input type="range" id="spacing" min="0" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input type="range" id="blur" min="0" max="200" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input type="color" id="base" value="#ff0000">
+</div>
+
+<img src="https://images.unsplash.com/photo-1642969177348-29c2e37d1791?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+     alt="Image">
+
+<script>
+    const inputs = document.querySelectorAll('.controls input')
+
+    function handleUpdateCss() {
+        const suffix = this.dataset.sizing || ''
+        document.documentElement.style.setProperty(`--${this.id}`, this.value + suffix)
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdateCss))
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdateCss))
+
+</script>
+
+</body>
+</html>
