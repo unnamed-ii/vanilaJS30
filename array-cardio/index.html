@@ -31,10 +31,65 @@
     ];
 
 
+    // filtering investors which were born in 1500's
+    const filteredInvestors = inventors.filter(i => i.year >= 1500 && i.year < 1600)
+    console.log(filteredInvestors)
+
+    // maping investors and returning their first and last names
+    const fullNames = inventors.map(i => [i.first + ' ' + i.last])
+    console.log(fullNames)
+
+    // sorting inventors birhdates from oldest to youngest
+    const investorsBirthdates = inventors.map(i => i.year)
+    const sortedBirthdates = investorsBirthdates.sort()
+    console.log(sortedBirthdates)
+
+    // calculating how many years lived all of inventors
+    function sumYears(){
+        let totalYears = 0;
+        const yearsArr = inventors.map(i => i.passed - i.year)
+        for (let i = 0; i < yearsArr.length; i++){
+            totalYears += yearsArr[i]
+        }
+        return totalYears
+    }
+    console.log(sumYears())
+
+    // sorting investors by their years of life
+    function sortInventors(){
+        const yearsArr = inventors.map(i => i.passed - i.year)
+        return yearsArr.sort().reverse()
+    }
+    console.log(sortInventors())
+
+    // sorting streets with 'de'
+    // const category = document.querySelector('.mw-category');
+    // const links = [...category.querySelectorAll('a')];
+    // const de = links
+    //             .map(link => link.textContent)
+    //             .filter(street => street.includes('de'))
 
 
+    // sorting people by first letter in the last names
+    const alpha = people.sort((lastOne, nextOne) => {
+        const [aLast, aFirst] = lastOne.split(', ');
+        const [bLast, bFirst] = nextOne.split(', ');
+        return aLast > bLast ? 1 : -1;
+    })
+    console.log(alpha)
 
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    // summing up the instance of each item of "data"
+    const transportation = data.reduce(function (obj, item) {
+        if (!obj[item]){
+            obj[item] = 0;
+        }
+        obj[item]++
+        return obj;
+    }, {})
+
+    console.log(transportation)
 
 </script>
 
